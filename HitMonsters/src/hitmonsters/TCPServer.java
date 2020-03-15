@@ -81,7 +81,6 @@ class Connection extends Thread {
                     flag=!flag;
                 }
                 }
-            
             catch(EOFException e) {
                 System.out.println("EOF:"+e.getMessage());
 	    } 
@@ -89,10 +88,10 @@ class Connection extends Thread {
                 System.out.println("IO:"+e.getMessage());
 	    }
         }
-            try {
-                out.writeUTF("Fin");
-            } catch (IOException ex) {
-                Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            out.writeUTF("Fin");
+        } catch (IOException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

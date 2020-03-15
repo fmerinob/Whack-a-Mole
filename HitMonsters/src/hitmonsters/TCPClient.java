@@ -19,8 +19,7 @@ public class TCPClient {
                 Random r = new Random();    
 		DataInputStream in = new DataInputStream( s.getInputStream());
 		DataOutputStream out = new DataOutputStream( s.getOutputStream());
-                
-                //String posiciones =in.readUTF();
+
                 //System.out.println();
                 boolean flag = true;
                 while (flag) {
@@ -40,8 +39,6 @@ public class TCPClient {
                         }
                         out.writeBoolean(posiciones.charAt(posAt)=='1');
                     }
-
-                    //out.writeBoolean(true);
             }
        	    } 
             catch (UnknownHostException e) {
@@ -57,7 +54,8 @@ public class TCPClient {
                     try {
                         s.close();
                     } catch (IOException e){
-                    System.out.println("close:"+e.getMessage());}
+                    System.out.println("close:"+e.getMessage());
+                    }
                     }
             }
 }
