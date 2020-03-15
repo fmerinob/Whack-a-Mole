@@ -12,8 +12,8 @@ public class Server {
 	try{
 		int serverPort = 7897; 
 		ServerSocket listenSocket = new ServerSocket(serverPort);
-		while(true) {
-			System.out.println("Enviando Posiciones"); 
+                
+		while(true) { 
                         Socket clientSocket = listenSocket.accept();
 			Connection2 c = new Connection2(clientSocket);
                         c.start();
@@ -42,34 +42,16 @@ class Connection2 extends Thread {
             boolean flag=true;
             int puntaje=0;
             while(flag){
-                int totMoles = r.nextInt(4), val;
                 try {
-                String pos="";
-                int i = 0,j = 0;
-                    while (j<r.nextInt(3)){
-                        pos+=0;
-                        j++;
+                    out.writeUTF("hola");
+                    boolean punto = in.readBoolean();
+                    if (punto){
+                        puntaje++;
+                        System.out.println("El puntaje de: "+ Thread.currentThread().getName() + " es de : " + puntaje);
                     }
-                    while (i < totMoles && pos.length()<9) {
-                        val=r.nextInt(2);
-                        if(val==1){
-                            i++;
-                        }
-                        pos+=val;
+                    if(puntaje == 10){
+                        flag=!flag;
                     }
-                    while (pos.length()<9){
-                        pos+=0;
-                    }
-                out.writeUTF(pos);
-                boolean punto = in.readBoolean();
-                
-                if (punto){
-                    puntaje++;
-                    System.out.println(puntaje);
-                }
-                if(puntaje == 10){
-                    flag=!flag;
-                }
                 }
             catch(EOFException e) {
                 System.out.println("EOF:"+e.getMessage());

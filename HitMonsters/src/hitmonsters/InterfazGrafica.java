@@ -2,16 +2,16 @@ package hitmonsters;
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
 import javax.swing.JButton;
 
 public class InterfazGrafica extends javax.swing.JFrame {
     String[] iconos = new String[2];
     JButton[] botones = new JButton[9];
-    int[] topos = new int[9];
-    int puntuacion = 0;
+    int[] tablero = new int[9];
     String nombreIcono;
     String nombre;
+    Socket s = null;
+    
 
     public InterfazGrafica() {
         initComponents();
@@ -26,13 +26,30 @@ public class InterfazGrafica extends javax.swing.JFrame {
         botones[6] = jButton7;
         botones[7] = jButton8;
         botones[8] = jButton9;
-
         for (int i = 0; i < 9; i++) {
             botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
             botones[i].setText("");
-        }   
+        }
+
+        try {
+            int serverPort = 7897;
+            s = new Socket("localhost", serverPort);
+        } 
+        catch (UnknownHostException e) {
+            System.out.println("Sock:"+e.getMessage()); 
+        }
+        catch (EOFException e) {
+            System.out.println("EOF:"+e.getMessage());
+        } 
+        catch (IOException e) {
+            System.out.println("IO:"+e.getMessage());
+        }
+        
+        MulticastReceiver clientIn = new MulticastReceiver();
+        clientIn.start();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,108 +181,157 @@ public class InterfazGrafica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //botones[0].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
         nombreIcono = botones[0].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
         if(nombre.equals("mole.png")){
-            topos[0] = 1;
+            tcp();
+            botones[0].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
-        else{
-            topos[0] = 0;
-        }
-        //botones[0].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         nombreIcono = botones[1].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[1] = 1;
-        }
-        else{
-            topos[1] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[1].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         nombreIcono = botones[2].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[2] = 1;
-        }
-        else{
-            topos[2] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[2].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         nombreIcono = botones[3].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[3] = 1;
-        }
-        else{
-            topos[3] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[3].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         nombreIcono = botones[4].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[4] = 1;
-        }
-        else{
-            topos[4] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[4].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         nombreIcono = botones[5].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[5] = 1;
-        }
-        else{
-            topos[5] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[5].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         nombreIcono = botones[6].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[6] = 1;
-        }
-        else{
-            topos[6] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[6].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         nombreIcono = botones[7].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[7] = 1;
-        }
-        else{
-            topos[7] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[7].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         nombreIcono = botones[8].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-                if(nombre.equals("mole.png")){
-            topos[8] = 1;
-        }
-        else{
-            topos[8] = 0;
+        if(nombre.equals("mole.png")){
+            tcp();
+            botones[8].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void tcp() {
+	    try {
+		DataInputStream in = new DataInputStream( s.getInputStream());
+		DataOutputStream out = new DataOutputStream( s.getOutputStream());
+                    String puntuacion = in.readUTF();
+                    if(puntuacion.equals("Fin")){
+                        s.close();
+                    }
+                    else{
+                        out.writeBoolean(true);
+                    }
+       	    } 
+            catch (UnknownHostException e) {
+		System.out.println("Sock:"+e.getMessage()); 
+	    }
+            catch (EOFException e) {
+                System.out.println("EOF:"+e.getMessage());
+    	    } 
+            catch (IOException e) {
+                System.out.println("IO:"+e.getMessage());
+            }
+    }
+    
+    
+        class MulticastReceiver extends Thread {
+
+        @Override
+        public void run() {
+	MulticastSocket s =null;
+   	 try {
+            InetAddress group = InetAddress.getByName("228.5.8.7");
+	    s = new MulticastSocket(6889);
+	    s.joinGroup(group); 
+             while(true){
+
+                System.out.println("Waiting for messages");	
+
+                byte[] buffer = new byte[1000];
+                DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
+ 		s.receive(messageIn);
+ 		String posiciones = new String(messageIn.getData());
+                System.out.println(posiciones);
+                for (int i = 0; i < 9; i++) {
+                    tablero[i] = Integer.parseInt(posiciones.substring(i, i+1));
+//Por alguna extraña razón manda los 9 números y un caracter en blanco, por eso funciona esto
+                    System.out.print(tablero[i]);
+                }
+                System.out.println("");
+                for (int i = 0; i < 9; i++) {
+                    if(tablero[i] == 1){
+                        botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+                    }
+                    else{
+                        botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+                    }
+                }
+             }
+ 	    }
+         catch (SocketException e){
+             System.out.println("Socket: " + e.getMessage());
+	 }
+         catch (IOException e){
+             System.out.println("IO: " + e.getMessage());
+         }
+	 finally {
+            if(s != null) s.close();
+        }
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -294,84 +360,10 @@ public class InterfazGrafica extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfazGrafica().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new InterfazGrafica().setVisible(true);
         });
-        
-        
-        
-        
-        
-	Socket s = null;
-	    try {
-	    	int serverPort = 7897;
-                s = new Socket("localhost", serverPort);
-		DataInputStream in = new DataInputStream( s.getInputStream());
-		DataOutputStream out = new DataOutputStream( s.getOutputStream());
-
-                //System.out.println();
-                boolean flag = true;
-                while (flag) {
-                    String posiciones = in.readUTF();
-                    int[] tablero = new int[9];
-                    if(posiciones.equals("Fin")){
-                        flag = false;
-                    }
-                    else{
-                        for (int i = 0; i < 9; i++) {
-                            if (i == 8) {
-                                tablero[i] = Integer.parseInt(posiciones.substring(8));
-                            }
-                            else{
-                                tablero[i] = Integer.parseInt(posiciones.substring(i, i+1));
-                            }
-                            System.out.print(tablero[i]);
-                        }
-                        System.out.println("");
-                        for (int i = 0; i < 9; i++) {
-                            if(tablero[i] == 1){
-                                botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
-                            }
-                            else{
-                                botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-                            }
-                            
-                        }
-                        for (int i = 0; i < 9; i++) {
-                            if(topos[i] == 1){
-                                out.writeBoolean(true);
-                            }
-                        }
-                    }
-            }
-       	    } 
-            catch (UnknownHostException e) {
-		System.out.println("Sock:"+e.getMessage()); 
-	    }
-            catch (EOFException e) {
-                System.out.println("EOF:"+e.getMessage());
-    	    } 
-            catch (IOException e) {
-                System.out.println("IO:"+e.getMessage());
-            } finally {
-                if(s!=null) 
-                    try {
-                        s.close();
-                    } catch (IOException e){
-                    System.out.println("close:"+e.getMessage());
-                    }
-                    }
-        
-        
-        
-        
-        
-
     }
-   
-    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
