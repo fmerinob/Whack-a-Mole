@@ -2,6 +2,8 @@ package hitmonsters;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 
 public class InterfazGrafica extends javax.swing.JFrame {
@@ -11,6 +13,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
     String nombreIcono;
     String nombre;
     Socket s = null;
+    int puntuacionLocal;
     
 
     public InterfazGrafica() {
@@ -26,6 +29,8 @@ public class InterfazGrafica extends javax.swing.JFrame {
         botones[6] = jButton7;
         botones[7] = jButton8;
         botones[8] = jButton9;
+        puntuacionLocal = 0;
+        jLabel1.setText("");
         for (int i = 0; i < 9; i++) {
             botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
             botones[i].setText("");
@@ -68,6 +73,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,27 +140,33 @@ public class InterfazGrafica extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +186,9 @@ public class InterfazGrafica extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -265,12 +279,13 @@ public class InterfazGrafica extends javax.swing.JFrame {
 	    try {
 		DataInputStream in = new DataInputStream( s.getInputStream());
 		DataOutputStream out = new DataOutputStream( s.getOutputStream());
-                    String puntuacion = in.readUTF();
+                String puntuacion = in.readUTF();
                     if(puntuacion.equals("Fin")){
                         s.close();
                     }
                     else{
-                        out.writeBoolean(true);
+                        puntuacionLocal++;
+                        out.writeInt(puntuacionLocal);
                     }
        	    } 
             catch (UnknownHostException e) {
@@ -285,7 +300,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
     }
     
     
-        class MulticastReceiver extends Thread {
+    class MulticastReceiver extends Thread {
 
         @Override
         public void run() {
@@ -295,26 +310,34 @@ public class InterfazGrafica extends javax.swing.JFrame {
 	    s = new MulticastSocket(6889);
 	    s.joinGroup(group); 
              while(true){
-
                 System.out.println("Waiting for messages");	
-
                 byte[] buffer = new byte[1000];
                 DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
  		s.receive(messageIn);
  		String posiciones = new String(messageIn.getData());
-                System.out.println(posiciones);
-                for (int i = 0; i < 9; i++) {
-                    tablero[i] = Integer.parseInt(posiciones.substring(i, i+1));
-//Por alguna extraña razón manda los 9 números y un caracter en blanco, por eso funciona esto
-                    System.out.print(tablero[i]);
+                if(posiciones.substring(0, 28).equals("El juego se acabó, lo ganó: ")){
+                    String mensajeLabel = (posiciones + "\n" +" Empezando un nuevo juego en 10 segundos");
+                    jLabel1.setText(mensajeLabel);
+                    System.out.println(mensajeLabel);
+                    puntuacionLocal = 0;
+                    Thread.sleep(10000);
+                    jLabel1.setText("");
                 }
-                System.out.println("");
-                for (int i = 0; i < 9; i++) {
-                    if(tablero[i] == 1){
-                        botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+                else {
+                    System.out.println(posiciones);
+                    for (int i = 0; i < 9; i++) {
+                        tablero[i] = Integer.parseInt(posiciones.substring(i, i+1));
+//Por alguna extraña razón manda los 9 números y un caracter en blanco, por eso funciona esto
+                        System.out.print(tablero[i]);
                     }
-                    else{
-                        botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+                    System.out.println("");
+                    for (int i = 0; i < 9; i++) {
+                        if(tablero[i] == 1){
+                            botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+                        }
+                        else{
+                            botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+                        }
                     }
                 }
              }
@@ -324,7 +347,9 @@ public class InterfazGrafica extends javax.swing.JFrame {
 	 }
          catch (IOException e){
              System.out.println("IO: " + e.getMessage());
-         }
+         }  catch (InterruptedException ex) {
+                Logger.getLogger(InterfazGrafica.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	 finally {
             if(s != null) s.close();
         }
@@ -376,5 +401,6 @@ public class InterfazGrafica extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
