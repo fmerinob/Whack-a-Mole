@@ -6,16 +6,16 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TCPServer {
+public class Server {
     
     public static void main (String args[]) {
 	try{
-		int serverPort = 7896; 
+		int serverPort = 7897; 
 		ServerSocket listenSocket = new ServerSocket(serverPort);
 		while(true) {
 			System.out.println("Enviando Posiciones"); 
                         Socket clientSocket = listenSocket.accept();
-			Connection c = new Connection(clientSocket);
+			Connection2 c = new Connection2(clientSocket);
                         c.start();
 		}
 	} 
@@ -23,12 +23,12 @@ public class TCPServer {
     }
 }
 
-class Connection extends Thread {
+class Connection2 extends Thread {
 	DataInputStream in;
 	DataOutputStream out;
 	Socket clientSocket;
         Random r= new Random();
-	public Connection (Socket aClientSocket) {
+	public Connection2 (Socket aClientSocket) {
 	    try {
 		clientSocket = aClientSocket;
 		in = new DataInputStream(clientSocket.getInputStream());

@@ -1,46 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hitmonsters;
 
-import java.awt.Color;
+import java.net.*;
+import java.io.*;
+import java.util.*;
+import javax.swing.JButton;
 
-/**
- *
- * @author Polupero
- */
 public class InterfazGrafica extends javax.swing.JFrame {
     String[] iconos = new String[2];
+    JButton[] botones = new JButton[9];
+    int[] topos = new int[9];
     int puntuacion = 0;
     String nombreIcono;
     String nombre;
-    /**
-     * Creates new form InterfazGrafica
-     */
+
     public InterfazGrafica() {
         initComponents();
         iconos[0] = "/hitmonsters/hole.png";
         iconos[1] = "/hitmonsters/mole.png";
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton1.setText("");
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton2.setText("");
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton3.setText("");
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton4.setText("");
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton5.setText("");
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton6.setText("");
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton7.setText("");
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton8.setText("");
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton9.setText("");    
+        botones[0] = jButton1;
+        botones[1] = jButton2;
+        botones[2] = jButton3;
+        botones[3] = jButton4;
+        botones[4] = jButton5;
+        botones[5] = jButton6;
+        botones[6] = jButton7;
+        botones[7] = jButton8;
+        botones[8] = jButton9;
+
+        for (int i = 0; i < 9; i++) {
+            botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+            botones[i].setText("");
+        }   
     }
 
     /**
@@ -175,58 +165,105 @@ public class InterfazGrafica extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
-        nombreIcono = jButton1.getIcon().toString();
+        //botones[0].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+        nombreIcono = botones[0].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
-        /*System.out.println(nombre);
         if(nombre.equals("mole.png")){
-            System.out.println("1");
+            topos[0] = 1;
         }
         else{
-            System.out.println("0");
-        }*/
-        //jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+            topos[0] = 0;
+        }
+        //botones[0].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        nombreIcono = jButton2.getIcon().toString();
+        nombreIcono = botones[1].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[1] = 1;
+        }
+        else{
+            topos[1] = 0;
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        nombreIcono = jButton3.getIcon().toString();
+        nombreIcono = botones[2].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[2] = 1;
+        }
+        else{
+            topos[2] = 0;
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        nombreIcono = jButton4.getIcon().toString();
+        nombreIcono = botones[3].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[3] = 1;
+        }
+        else{
+            topos[3] = 0;
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        nombreIcono = jButton5.getIcon().toString();
+        nombreIcono = botones[4].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[4] = 1;
+        }
+        else{
+            topos[4] = 0;
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        nombreIcono = jButton6.getIcon().toString();
+        nombreIcono = botones[5].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[5] = 1;
+        }
+        else{
+            topos[5] = 0;
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        nombreIcono = jButton7.getIcon().toString();
+        nombreIcono = botones[6].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[6] = 1;
+        }
+        else{
+            topos[6] = 0;
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        nombreIcono = jButton8.getIcon().toString();
+        nombreIcono = botones[7].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[7] = 1;
+        }
+        else{
+            topos[7] = 0;
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        nombreIcono = jButton9.getIcon().toString();
+        nombreIcono = botones[8].getIcon().toString();
         nombre = nombreIcono.substring(nombreIcono.length()-8);
+                if(nombre.equals("mole.png")){
+            topos[8] = 1;
+        }
+        else{
+            topos[8] = 0;
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
@@ -262,11 +299,81 @@ public class InterfazGrafica extends javax.swing.JFrame {
                 new InterfazGrafica().setVisible(true);
             }
         });
+        
+        
+        
+        
+        
+	Socket s = null;
+	    try {
+	    	int serverPort = 7897;
+                s = new Socket("localhost", serverPort);
+		DataInputStream in = new DataInputStream( s.getInputStream());
+		DataOutputStream out = new DataOutputStream( s.getOutputStream());
+
+                //System.out.println();
+                boolean flag = true;
+                while (flag) {
+                    String posiciones = in.readUTF();
+                    int[] tablero = new int[9];
+                    if(posiciones.equals("Fin")){
+                        flag = false;
+                    }
+                    else{
+                        for (int i = 0; i < 9; i++) {
+                            if (i == 8) {
+                                tablero[i] = Integer.parseInt(posiciones.substring(8));
+                            }
+                            else{
+                                tablero[i] = Integer.parseInt(posiciones.substring(i, i+1));
+                            }
+                            System.out.print(tablero[i]);
+                        }
+                        System.out.println("");
+                        for (int i = 0; i < 9; i++) {
+                            if(tablero[i] == 1){
+                                botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+                            }
+                            else{
+                                botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+                            }
+                            
+                        }
+                        for (int i = 0; i < 9; i++) {
+                            if(topos[i] == 1){
+                                out.writeBoolean(true);
+                            }
+                        }
+                    }
+            }
+       	    } 
+            catch (UnknownHostException e) {
+		System.out.println("Sock:"+e.getMessage()); 
+	    }
+            catch (EOFException e) {
+                System.out.println("EOF:"+e.getMessage());
+    	    } 
+            catch (IOException e) {
+                System.out.println("IO:"+e.getMessage());
+            } finally {
+                if(s!=null) 
+                    try {
+                        s.close();
+                    } catch (IOException e){
+                    System.out.println("close:"+e.getMessage());
+                    }
+                    }
+        
+        
+        
+        
+        
+
     }
    
     
     
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
