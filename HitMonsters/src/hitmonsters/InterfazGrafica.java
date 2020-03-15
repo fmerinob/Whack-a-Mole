@@ -31,6 +31,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
         botones[8] = jButton9;
         puntuacionLocal = 0;
         jLabel1.setText("");
+        jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
         for (int i = 0; i < 9; i++) {
             botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
             botones[i].setText("");
@@ -74,6 +75,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +144,8 @@ public class InterfazGrafica extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,17 +169,20 @@ public class InterfazGrafica extends javax.swing.JFrame {
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -285,6 +292,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
                     }
                     else{
                         puntuacionLocal++;
+                        jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
                         out.writeInt(puntuacionLocal);
                     }
        	    } 
@@ -320,14 +328,16 @@ public class InterfazGrafica extends javax.swing.JFrame {
                     jLabel1.setText(mensajeLabel);
                     System.out.println(mensajeLabel);
                     puntuacionLocal = 0;
+                    jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
                     Thread.sleep(10000);
+                    puntuacionLocal = 0;//Esto solo es por si alguien hace clic en un topo durante la pausa.
+                    jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
                     jLabel1.setText("");
                 }
                 else {
                     System.out.println(posiciones);
                     for (int i = 0; i < 9; i++) {
                         tablero[i] = Integer.parseInt(posiciones.substring(i, i+1));
-//Por alguna extraña razón manda los 9 números y un caracter en blanco, por eso funciona esto
                         System.out.print(tablero[i]);
                     }
                     System.out.println("");
@@ -402,5 +412,6 @@ public class InterfazGrafica extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

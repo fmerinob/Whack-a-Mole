@@ -50,7 +50,6 @@ class Connection2 extends Thread {
                     puntaje = punto;
                         System.out.println("El puntaje de: "+ Thread.currentThread().getName() + " es de : " + puntaje); //Se que suena absurdo tener un if para algo que se hace en ambas partes, pero no funciona si no, no tocar.
                     if(puntaje == 10){
-                        flag=!flag;
                         MulticastServer2.setStatus(1);
                         MulticastServer2.setGanador(Thread.currentThread().getName());
                     }
