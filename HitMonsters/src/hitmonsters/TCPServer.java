@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author JGUTIERRGARC
- */
-
 package hitmonsters;
 
 import java.net.*;
@@ -24,7 +14,7 @@ public class TCPServer {
 		ServerSocket listenSocket = new ServerSocket(serverPort);
 		while(true) {
 			System.out.println("Enviando Posiciones"); 
-                        Socket clientSocket = listenSocket.accept();  // Listens for a connection to be made to this socket and accepts it. The method blocks until a connection is made. 
+                        Socket clientSocket = listenSocket.accept();
 			Connection c = new Connection(clientSocket);
                         c.start();
 		}
