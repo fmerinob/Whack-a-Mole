@@ -5,6 +5,5 @@ class ClientThread extends Thread {
     }
     public void run(){
         TCPClient cliente = new TCPClient();
-        cliente.main(null);
     }
 } 
