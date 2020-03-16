@@ -1,46 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hitmonsters;
 
-import java.awt.Color;
+import java.net.*;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 
-/**
- *
- * @author Polupero
- */
 public class InterfazGrafica extends javax.swing.JFrame {
+
     String[] iconos = new String[2];
-    int puntuacion = 0;
+    JButton[] botones = new JButton[9];
+    int[] tablero = new int[9];
     String nombreIcono;
     String nombre;
-    /**
-     * Creates new form InterfazGrafica
-     */
+    Socket s = null;
+    int puntuacionLocal;
+
     public InterfazGrafica() {
         initComponents();
         iconos[0] = "/hitmonsters/hole.png";
         iconos[1] = "/hitmonsters/mole.png";
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton1.setText("");
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton2.setText("");
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton3.setText("");
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton4.setText("");
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton5.setText("");
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton6.setText("");
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton7.setText("");
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton8.setText("");
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
-        jButton9.setText("");    
+        botones[0] = jButton1;
+        botones[1] = jButton2;
+        botones[2] = jButton3;
+        botones[3] = jButton4;
+        botones[4] = jButton5;
+        botones[5] = jButton6;
+        botones[6] = jButton7;
+        botones[7] = jButton8;
+        botones[8] = jButton9;
+        puntuacionLocal = 0;
+        jLabel1.setText("");
+        jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
+        for (int i = 0; i < 9; i++) {
+            botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+            botones[i].setText("");
+        }
+
+        try {
+            int serverPort = 7897;
+            s = new Socket("localhost", serverPort);
+        } catch (UnknownHostException e) {
+            System.out.println("Sock:" + e.getMessage());
+        } catch (EOFException e) {
+            System.out.println("EOF:" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO:" + e.getMessage());
+        }
+
+        MulticastReceiver clientIn = new MulticastReceiver();
+        clientIn.start();
     }
 
     /**
@@ -61,6 +70,8 @@ public class InterfazGrafica extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,36 +138,47 @@ public class InterfazGrafica extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -167,67 +189,170 @@ public class InterfazGrafica extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
-        nombreIcono = jButton1.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
-        /*System.out.println(nombre);
-        if(nombre.equals("mole.png")){
-            System.out.println("1");
+        nombreIcono = botones[0].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[0].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
         }
-        else{
-            System.out.println("0");
-        }*/
-        //jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        nombreIcono = jButton2.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[1].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[1].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        nombreIcono = jButton3.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[2].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[2].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        nombreIcono = jButton4.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[3].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[3].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        nombreIcono = jButton5.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[4].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[4].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        nombreIcono = jButton6.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[5].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[5].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        nombreIcono = jButton7.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[6].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[6].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        nombreIcono = jButton8.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[7].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[7].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        nombreIcono = jButton9.getIcon().toString();
-        nombre = nombreIcono.substring(nombreIcono.length()-8);
+        nombreIcono = botones[8].getIcon().toString();
+        nombre = nombreIcono.substring(nombreIcono.length() - 8);
+        if (nombre.equals("mole.png")) {
+            tcp();
+            botones[8].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void tcp() {
+        try {
+            DataInputStream in = new DataInputStream(s.getInputStream());
+            DataOutputStream out = new DataOutputStream(s.getOutputStream());
+            String puntuacion = in.readUTF();
+            if (puntuacion.equals("Fin")) {
+                s.close();
+            } else {
+                puntuacionLocal++;
+                jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
+                out.writeInt(puntuacionLocal);
+            }
+        } catch (UnknownHostException e) {
+            System.out.println("Sock:" + e.getMessage());
+        } catch (EOFException e) {
+            System.out.println("EOF:" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO:" + e.getMessage());
+        }
+    }
+
+    class MulticastReceiver extends Thread {
+
+        @Override
+        public void run() {
+            MulticastSocket s = null;
+            try {
+                InetAddress group = InetAddress.getByName("228.5.8.7");
+                s = new MulticastSocket(6889);
+                s.joinGroup(group);
+                while (true) {
+                    System.out.println("Waiting for messages");
+                    byte[] buffer = new byte[1000];
+                    DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
+                    s.receive(messageIn);
+                    String posiciones = new String(messageIn.getData());
+                    if (posiciones.substring(0, 28).equals("El juego se acabó, lo ganó: ")) {
+                        String mensajeLabel = (posiciones + "\n" + " Empezando un nuevo juego en 10 segundos");
+                        jLabel1.setText(mensajeLabel);
+                        System.out.println(mensajeLabel);
+                        puntuacionLocal = 0;
+                        jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
+                        Thread.sleep(10000);
+                        puntuacionLocal = 0;//Esto solo es por si alguien hace clic en un topo durante la pausa.
+                        jLabel2.setText("Tu puntuación es de: " + puntuacionLocal);
+                        jLabel1.setText("");
+                    } else {
+                        System.out.println(posiciones);
+                        for (int i = 0; i < 9; i++) {
+                            tablero[i] = Integer.parseInt(posiciones.substring(i, i + 1));
+                            System.out.print(tablero[i]);
+                        }
+                        System.out.println("");
+                        for (int i = 0; i < 9; i++) {
+                            if (tablero[i] == 1) {
+                                botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[1])));
+                            } else {
+                                botones[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconos[0])));
+                            }
+                        }
+                    }
+                }
+            } catch (SocketException e) {
+                System.out.println("Socket: " + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("IO: " + e.getMessage());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(InterfazGrafica.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (s != null) {
+                    s.close();
+                }
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -257,15 +382,11 @@ public class InterfazGrafica extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfazGrafica().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new InterfazGrafica().setVisible(true);
         });
     }
-   
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -277,5 +398,7 @@ public class InterfazGrafica extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
