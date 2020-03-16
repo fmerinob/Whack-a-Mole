@@ -143,4 +143,3 @@ class MulticastServer2 extends Thread{
             if(s != null) s.close();
         }
     }		     
-}
