@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+            function loadNewContent(id, target) {
+                var ajaxRequest;
+                if (window.XMLHttpRequest){
+                    ajaxRequest=new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+//Esto era solo para un objeto, el que no esta comentado es para un arreglo
+//                ajaxRequest.onreadystatechange = function(){
+//                    if (ajaxRequest.readyState==4 && ajaxRequest.status==200){
+//                        var JSONObject = JSON.parse(ajaxRequest.responseText);
+//                        var txt = "field1: " + JSONObject.field1+ " field2: "+ JSONObject.field2+ " field3: "+ JSONObject.field3+ "<br />";
+//El JsonObject.field1 es porque esta desempaquetando lo de empaquetador, por 
+//lo tanto, debe de tener el mismo nombre
+//                        document.getElementById(id).innerHTML=txt;
+//                    }
+//                }
+
+                ajaxRequest.onreadystatechange = function(){
+                    if (ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                        var JSONObject = JSON.parse(ajaxRequest.responseText);
+                        var txt = ""
+                        for(var i = 0; i<JSONObject.transformers.length; i++){
+                            txt = txt + JSONObject.transformers[i].id + " " + JSONObject.transformers[i].name + "<br>";
+//El .id y el .name reemplazan el JsonObject.field1, porque recordar que field1 
+//fue el nombre que le di a la variable en el empaquetador (fuck knows why, que 
+//terrible nombre de variable)
+                        }
+                        document.getElementById(id).innerHTML=txt;
+                    }
+                }
+
+                ajaxRequest.open("GET", target, true /*async*/);
+                ajaxRequest.send();
+            }
+        </script>
+        <div id = "res">Aquí va mi JSON</div>
+        <input type="submit" value="OK" onclick ="loadNewContent('res', 'Empaquetador');"/>
+    </body>
+</html>

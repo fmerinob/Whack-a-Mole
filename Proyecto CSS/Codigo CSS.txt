@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<style>
+
+p {
+    color: black;
+}
+#primerP {
+    color: red;
+    font-family: Verdana;
+}
+#segundoP {
+    text-transform: capitalize; 
+}
+#tercerP {
+    text-transform: uppercase;
+}
+#cuartoP::first-line {
+    font-style: italic; 
+}
+#quintoP {
+    text-shadow: 2px 2px 5px black; 
+}
+#sextoP {
+    background-color: #07B3AA;
+}
+
+div {
+	color: black;
+    margin-top: 2%;
+    border-color: black;
+    border-style: solid;
+}
+#primerD {
+	background-color: red;
+    border-style: solid;
+    border-width: 4px;
+    border-color: yellow;
+    outline: 4px solid green; 
+}
+#segundoD {
+	margin-right: 60%; 
+}
+#tercerD {
+	margin-left: 70%;
+}
+#cuartoD {
+	text-align: center;
+}
+#quintoD {
+    border-top-color: #3371D8;
+    border-right-color: #6593DE;
+    border-left-color: #85A7DF;
+    border-bottom-color: #AABDDC;
+}
+#sextoD {
+    border-width: 20px;
+}
+#septimoD {
+	border-style: dotted;
+}
+#octavoD {
+	border-radius: 25px;
+}
+#novenoD {
+	background-image: linear-gradient(cyan, purple);
+}
+#decimoD p {
+	font-weight: bold; 
+}
+#decimoD > p {
+	font-size: 20px; 
+}
+#onceavoD {
+	width: 100px;
+	height: 90px;
+	border: 1px dotted black;
+}
+#doceavoD {
+	width: 100px;
+	height: 90px;
+	border: 1px dotted black;
+    overflow: scroll;
+}
+#treceavoD {
+	width: 100px;
+	height: 90px;
+	border: 1px dotted black;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+#catorceavoD {
+	width: 100px;
+ 	height: 100px;
+	background: red;
+	transition: width 2s;
+}
+#catorceavoD:hover {
+	width: 300px;
+}
+#quinceavoD {
+	width: 100px;
+	height: 100px;
+	background: red;
+	transition: width 2s ease-in-out 0.5s, background 2s ease-in-out 0.5s;
+}
+#quinceavoD:hover {
+	width: 300px;
+    background: blue;
+}
+a:link {
+    color: red;
+}
+a:visited {
+    color: blue;
+}
+a:hover {
+    color: black;
+}
+a:active {
+    color: green;
+}
+
+.t1 {
+    border: 2px solid black;
+}
+.t2 {
+	border: 2px solid black;
+    border-collapse: collapse;
+}
+#primerL {
+	list-style-type: upper-roman;
+}
+#segundoL {
+	list-style: circle inside url('img_marker.png');
+}
+#tercerL {
+	list-style-type: none;
+}
+h1 {
+    color: rgb(0,0,0);
+}
+body {
+    background-color: #07B3AA;
+    font-family: Arial;
+}
+
+
+
+</style>
+</head>
+
+<body>
+<h1>Demostracion práctica CSS</h1>
+<p>Esta página web tiene la finalidad de dar una pequeña introducción a lo que es CSS y a la vez, servir como una demostración sobre lo que se puede hacer con este; por lo tanto, se utilizarán los menores componentes posibles de HTML, para que pueda brillar el lenguaje de CSS por si mismo</p>
+<p>CSS tiene como objetivo mejorar la presentacion de una página que este creada con HTML; para hacer esto, introduce múltiples formas de darle diferente formato y estilo a todos los componentes ya existentes, siendo que su enfoque principal es en objetos inmóviles, aunque también cuenta con algunas animaciones.</p>
+<p>CSS se puede integrar de 2 maneras diferentes, la primera es que se haga todo en la sección de style que se encuentra en la parte superior del documento, pero también se pueden hacer modificaciones fuera de este; la segunda es que se cree un documento separado que tenga todo el formato de CSS en este, esto se solía hacer para poder llevar una estructura modular y hacer que se pudieran cambiar las cosas de manera más fácil</p>
+<p>Por todo lo anteriormente mencionado, solo se usarán los siguientes elementos: párrafos, headers, divisores, listas y tablas; además, se usará el primer modelo de integración comentado previamente, en el cual se dejará toda la integración de CSS en el mismo documento que el HTML.</p>
+<p>Por ultimo, es importante saber que CSS funciona con jerarquías, es decir, siempre aplicará aquello que este en el nivel más general; a menos que, haya algo establecido para un nivel más específico.</p>
+
+<h3>Vamos a empezar con lo que nos posibilita hacer CSS:</h3>
+<p id = "primerP">Nos permite darle un estilo diferente a cada párrafo, siendo que podemos cambiar el tipo de letra, o el color</p>
+<p id = "segundoP">Tambien podemos escoger afectar a cada palabra </p>
+<p id = "tercerP">E inclusive a cada letra </p>
+<p id = "cuartoP">Pero esto no es lo único que puede hacer, también puede afectar partes específicas de cada párrafo, como la primera línea. </p>
+<p id = "quintoP">Todo esto para darle a cada párrafo su estilo e identidad propia</p>
+<h3>De la misma manera, tambien podemos modificar divisores y sus componentes:</h3>
+<div id = "primerD">
+<p id = sextoP>Sabemos que todos los divisores tienen un margen, un borde, y un padding. En este caso, definiremos el margen como la distancia que tiene el divisor con otros elementos y lo marcaremos en verde; el borde, como el contenedor del divisor, se marcará en amarillo; y el padding, como la distancia entre el contenido del divisor y el borde, siendo que este será de color rojo</p>
+</div>
+<div id = "segundoD">
+<p>Todos estos atributos se pueden modificar, resultando en tamaños diferentes</p>
+</div>
+<div id = "tercerD">
+<p>Posiciones distintas</p>
+</div>
+<div id = "cuartoD">
+<p>Posiciones de texto diferentes</p>
+</div>
+<div id = "quintoD">
+<p>Distintos colores</p>
+</div>
+<div id = "sextoD">
+<p>Estilos</p>
+</div>
+<div id = "septimoD">
+<p>Y hasta diseños</p>
+</div>
+<div id = "octavoD">
+<p>Inclusive circulares</p>
+</div>
+<div id = "novenoD">
+<p>Y con sus propios fondos</p>
+</div>
+<div id = "decimoD">
+<p>De la misma manera, se puede modificar  aquello que se encuentre dentro de los divisores para darle otro formato</p>
+<p>Por ejemplo, se puede hacer que todos lo que sea hijo directo del divisor tenga un formato</p>
+<span><p>Mientras que todo aquello que sea nieto, o mas allá, tenga otro formato</p></span>
+</div>
+<h3>Otra de las ventajas que nos da CSS, es que podemos cambiar como se ven las cosas al interactuar con ellas; por ejemplo, en el siguiente link podemos ver como tiene un color diferente al pasar por encima, al hacer clic y posterior a hacer clic.</h3><a href="https://www.google.com">Hola ¡soy un link!</a>
+<h3>Hay veces que el texto que se pone, no llega a caber completo dentro del divisor.</h3>
+
+<div id = "onceavoD">
+<p>Por lo que llegan a suceder cosas como esta.</p>
+</div>
+<div id = "doceavoD">
+<p>Cuando esto sucede, CSS nos deja poner un scroll para evitar el overflow.</p>
+</div>
+<div id = "treceavoD">
+<p>Este también puede ser horizontal</p>
+</div>
+<h3>Una cosa más que hay que revisar son las tablas, estas nos permiten organizar información de manera facil por si mismas, pero su presentación puede hacer la diferencia entre si es comprensible o no</h3>
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  <tr>
+    <td>Fernando</td>
+    <td>Merino</td>
+  </tr>
+  <tr>
+    <td>Francisco</td>
+    <td>Altamirano</td>
+  </tr>
+</table>
+
+<p>Esta tabla se puede mejorar de muchas maneras, una de ellas es poniéndole los bordes:</p>
+
+<table class ="t1">
+  <tr>
+    <th class ="t1">Firstname</th>
+    <th class ="t1">Lastname</th>
+  </tr>
+  <tr>
+    <td class ="t1">Fernando</td>
+    <td class ="t1">Merino</td>
+  </tr>
+  <tr>
+    <td class ="t1">Francisco</td>
+    <td class ="t1">Altamirano</td>
+  </tr>
+</table>
+
+<p>Otra, podria ser que se fusionaran los bordes para hacerlo más simple</p>
+
+<table class ="t2">
+  <tr>
+    <th class ="t2">Firstname</th>
+    <th class ="t2">Lastname</th>
+  </tr>
+  <tr>
+    <td class ="t2">Fernando</td>
+    <td class ="t2">Merino</td>
+  </tr>
+  <tr>
+    <td class ="t2">Francisco</td>
+    <td class ="t2">Altamirano</td>
+  </tr>
+</table>
+
+<h3>Además, también se pueden cambiar las listas, tanto las ordenadas como no las ordenadas</h3>
+<p>Una lista que normalmente se vería así:</p>
+<p>Materias favoritas</p>
+<ul>
+  <li>Sistemas distribuidos</li>
+  <li>ADSI</li>
+  <li>FMC</li>
+</ul>
+<p>Se le pueden cambiar los iconos de numeración</p>
+<p>Materias favoritas</p>
+<ul id = primerL>
+  <li>Sistemas distribuidos</li>
+  <li>ADSI</li>
+  <li>FMC</li>
+</ul>
+<p>Poner imágenes, o un placeholder en caso de que no carguen</p>
+<p>Materias favoritas</p>
+<ul id = segundoL>
+  <li>Sistemas distribuidos</li>
+  <li>ADSI</li>
+  <li>FMC</li>
+</ul>
+<p>O inclusive remover la numeración</p>
+<p>Materias favoritas</p>
+<ul id = tercerL>
+  <li>Sistemas distribuidos</li>
+  <li>ADSI</li>
+  <li>FMC</li>
+</ul>
+<h3>Por último, también hablaremos un poco de transiciones</h3>
+<p>Normalmente, esto es una parte que se suele trabajar con javascript, pero CSS es capaz de manejar animaciones a una muy pequeña escala, semejante en nivel al diseño que puede ofrecerte HTML</p>
+<p>Las transiciones son responsivas; es decir, esperan a que tu interactues con ellas y mientras tanto no se estan ejecutando; un ejemplo de ello es el cuadrado que se encuentra debajo</p>
+<div id = "catorceavoD"></div>
+<p>Este se puede modificar para que cambie de color, tenga un delay antes de iniciar, haga el cambio de una manera más gradual, etc.</p>
+<div id = "quinceavoD"></div>
+</body>
+</html>

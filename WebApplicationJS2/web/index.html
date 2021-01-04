@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--
+No se porque no funciona crear un folder, revisar después.
+En javascript, hay: 1=='1' y 1==='1', el primero daría verdadero y el segundo no,
+porque el segundo checa también el tipo de dato
+Increase text nos demuestra que aunque no sea botón, podemos interactuar con el
+En el increase text 2, nos podemos saltar el document.get porque lo pasamos con 
+this
+En el upperCase, igual le puedo cambiar el onchange y ponerle onkeydown para que 
+se haga automático en lugar de hacerlo al hacer clic fuera del textinput
+Si en lugar de setTimeout pusiera setInterval, lo hace cada 3 segundos, osea, 
+varias veces, no solo una.
+Podemos ver que los 2 scripts de Json no tienen ninguna función, por lo que no 
+funcionan como los demás de que cargan una función, si no que afectan algo
+directamente dentro de la página, en el primer caso, no hay problema porque solo
+pide el document.write, pero en el segundo si, porque hace referencia a un
+elemento, y si esta antes del elemento, pues no funciona. Y aunque la parte de
+Juan del segundo debería de funcionar, si falla en alguna parte, el resto ya no 
+se ejecuta
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <script>
+            function changeImage() { //Cambia la imagen
+                element=document.getElementById('myimage');
+                if (element.src.match("down")) {
+                    element.src="up.jpg";
+                } else {
+                    element.src="down.jpg";
+                }
+            }
+        </script> 
+        
+        <script>
+            var person=new Object(); //Escribe al inicio del documento esta info
+            person.firstname="Juan";
+            person.age=50;
+            person.aMethod= function(x){
+                person.age = person.age + x;
+            }
+            person.aMethod(3);
+            document.write(person.firstname + " is " + person.age + " years old.");
+        </script>
+        
+        <script>
+            function changeText(elementId) { //Cambia el texto de la tabla
+                var element=document.getElementById(elementId);
+                element.innerHTML="12345678910";
+            }
+        </script>
+        
+        <script>
+            function myFunction() { //El input de número
+            var y=document.getElementById("mess");
+            y.innerHTML="";
+            try {
+                var x=document.getElementById("demo").value;
+                if(x=="") throw "empty";
+                if(isNaN(x)) throw "not a number";
+                if(x>10) throw "too high";
+                if(x<5) throw "too low";
+            } 
+            catch(err) {
+                y.innerHTML="Error: " + err + ".";
+            }
+            }
+        </script>
+        
+        <script>
+            function increaseText(id){ //Cambia el click on this text mediante un id
+                document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.charAt(0)+ document.getElementById(id).innerHTML;
+            }
+        </script>
+        
+        <script>
+            function increaseText2(element){ //Cambia el click on this text mediante un element
+                element.innerHTML = element.innerHTML.charAt(0)+ element.innerHTML;
+            }
+        </script>
+        
+        <script>
+            function upperCase(id){ //Cambia a mayúsculas el textInput de mouseOverMe
+                var text=document.getElementById(id);
+                text.value=text.value.toUpperCase();
+            }
+        </script>
+        
+        <script>
+            function eventMouseOver(obj) { //cambia el texto de mouse over me
+                obj.innerHTML="Thank You";
+            }
+            function eventMouseOut(obj){
+                obj.innerHTML="Mouse Over Me";
+            }
+        </script>
+        
+        <script>
+            function saluda(){ //es llamado por iniciaFuncion después de 5 segundos por el botón de inicia
+                alert("hola");
+            }
+            var referencia;
+            function iniciaFuncion(){
+                referencia = setTimeout(saluda, 3000);
+            }
+            function detieneFuncion(){
+                clearTimeout(referencia);
+            }
+        </script>
+        
+        <script>
+            function validateForm(){
+                var x=document.forms["myForm"]["fname"].value;
+                if (x==null || x=="") {
+                    alert("First name must be filled out");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        
+        <img id="myimage" onclick="changeImage()" src="down.jpg" >
+        
+        <form name="myForm" action="nextpage.jsp" onsubmit="return validateForm()" method="post">
+            First name: <input type="text" name="fname"> <br />
+            <input type="submit" value="Submit">
+        </form>
+       
+        <input type="submit" value="Inicia" onclick="iniciaFuncion();"/>
+        <input type="submit" value="Cancela" onclick="detieneFuncion();"/>
+        
+        
+        <h1 id ="anyId1" onclick="increaseText('anyId1')">Click on this text!</h1>
+        <h1 id ="anyId2" onclick="increaseText2(this)">Click on this text!</h1> 
+        
+        <div onmouseover="eventMouseOver(this)"
+            onmouseout="eventMouseOut(this)" >
+            Mouse Over Me
+        </div>
+        
+        <input type="text" id="anyId3" onchange="upperCase('anyId3');">
+        
+        <p>Please input a number between 5 and 10:</p>
+        <input id="demo" type="text">
+        <button type="button" onclick="myFunction()">Test Input</button>
+        <p id="mess"></p>
+        
+        <p>
+        Name: <span id="aName"> </span> <br/>
+        Year: <span id="aYear"> </span> <br/>
+        </p>
+        
+        <script>
+            var anObject= {name:"Smith", year:1984};
+            document.getElementById("aName").innerHTML=anObject.name;
+            document.getElementById("aYear").innerHTML=anObject.year;
+            var person=new Object();
+            person.firstname="Juan";
+            person.age=50;
+            document.write(person.firstname + " is " + person.age + " years old.");
+        </script>
+        
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td><div id = "uno">1</div></td>
+                    <td><input type="submit" value="Change" onclick="changeText('uno')"/></td>
+                </tr>
+                <tr>
+                    <td><span id = "dos">2</span></td>
+                    <td><input type="submit" value="Change" onclick="changeText('dos')"/></td>
+                </tr>                
+                <tr>
+                    <td id = "tres">3</td>
+                    <td><input type="submit" value="Change" onclick="changeText('tres')"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

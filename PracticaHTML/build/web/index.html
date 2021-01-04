@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Descripcion</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apellido paterno:</td>
+                    <td><input type="text" name="Apellido paterno" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Apellido materno:</td>
+                    <td><input type="text" name="Apellido materno" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Genero</td>
+                    <td>
+                        <label><input type="radio" name="Genero" value="Hombre" />Hombre</label>
+                        <label><input type="radio" name="Genero" value="Mujer" />Mujer</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Region del pais</td>
+                    <td><select name="Region">
+                            <option>Norte</option>
+                            <option>Sur</option>
+                            <option>Este</option>
+                            <option>Oeste</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Tiene todas las vacunas?</td>
+                    <td><input type="checkbox" name="Vacunas" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Comentarios adicionales</td>
+                    <td><input type="text" name="Comentarios" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Foto:</td>
+                    <td><img src="IMAGES/perfil.jpg" width="100" height="100" alt="perfil"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tres paises donde me gustaria vivir</td>
+                    <td><ol type="A">
+                            <li>Italia</li>
+                            <li>Mexico</li>
+                            <li>Japon</li>
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mi sitio web favorito es:</td>
+                    <td><a href="https://www.reddit.com">Reddit</a></td>
+                </tr>
+                <tr>
+                    <td><input type="reset" value="Limpiar" /></td>
+                    <td><input type="submit" value="Enviar" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

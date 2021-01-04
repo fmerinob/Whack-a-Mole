@@ -1,0 +1,53 @@
+Netbeans nuevo
+
+Tanto tcp como udp generan un puerto y socket, pero udp lo deja así y empieza a mandar datagramas, mientras que tcp además hace una carretera con los datastream
+De querer quitarle el while al tcp, lo unico que haría sería dejar el in.read, el outwrite y el clientSocket.close.
+El tcpSockets manda 200 mensajes por cliente, y el launcher instancia 250 usuarios.
+Es importante tanto en TCP como UDP como multicast correr primero el servidor.
+En RMI debe de haber una policy tanto en el cliente como en el servidor, aunque digan lo mismo; y estas se deben de llamar con el System.setProperty. el server de RMI tarda en arrancar, esperar un poco antes de arrancar el cliente.
+En RMI (tanto Java como Bots), el main del server solo genera los stubs, es en la definición de los papeles de las interfaces que se hace el trabajo.
+EN AMQ, los sender y receiver son exactamente los mismos, excepto  en la parte de destination, donde pongo .createQueue o .createTopic según corresponda
+
+
+
+Netbeans 8.2
+Todo aquello que este en source packages son servlets, los que esten en webpages son html o jsp. En la parte de services se encuentran las bases de datos
+
+Practica HTML es la primera práctica y solo muestra como usar todos los elementos, nada valioso
+Request-reply esta como pasar atributos de manera oculta en la parte de auto con: 
+<input type="hidden" name="edad" value="<%=request.getParameter("edad")%>" />
+en lugar de volver a hacer todo el request, pudimos haber llamado a edad que ya estaba declarado arriba.
+ValidaciónFormula tiene como cambiar letras según se va escribiendo y como identificar números; además, enseña como validar todos los elementos, como mandar alertas y como hacer referencia a elementos usando javascript.
+WebAjax tiene comentado 2 cosas, la primera es como recuperar información del info.txt, el cual usa el get; después tiene como recuperarla de un .jsp, el cual esa el post. Ya sin comentar, tiene como recuperar información de un XML.
+WebAppGetPost solo me dice como usar get y post, nada valioso
+AjaxHints muestra como mandar parámetros de un objeto de tipo get. Es importante recordar que se mandan parámetros de manera distinta con get y post en Ajax (Parece ser que si al mandar archivos como get, lo cambio y le pongo post debería de funcionar, pero solo en las versiones más nuevas; esto no es cierto si es alreves (poner un get en el método de post))
+Cinemas muestra como conectar un index con un servlet, y hacer que este servlet llame a su vez a otros servlets para pasarles atributos, sin abrirlos ni nada. Estos servlets que no se abren no es necesario pasarles lo de addInformation to deployment descriptor. Esto lo hace en la partde de GetSuggestion con: 
+RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(recurso);
+dispatcher.include(request,response);
+DBBasics nos muestra como hacer requests desde un jsp para acceder a una base de datos, así como la manera de importar las librerias necesarias para esto; además, nos enseña como enviar los valores de String y numéricos para que los acepte la base de datos
+Encuesta dice como mandar cosas a los servlets, nada valioso, mejor ver Cinemas
+HTTPSession muestra como asignar cosas a una sesion de http en la parte de welcome; en la parte de profile muestra como checar las credenciales, para asi evitar que si alguien tenía la dirección url pueda saltarse hasta allá sin pasar por la parte de usuario y contraseña
+JS muestra como usar y llamar a un javascript file desde el html. Esto se reemplaza más tarde con los scripts.
+JS2 Enseña muchísimas cosas: Cambiar imágenes, escribir con Jspn, cambiar el texto de un objeto, leer y trabajar con un input, cambiar el texto de un texto, cambiar lo escrito a mayúsculas, interactuar con objetos al pasar el mouse por encima, mandar alertas, hacer que las funciones tengan un tiempo para que se ejecuten y como cancelarlo y la primera validación, pero para eos mejor checar Validación Formularios
+Login es el primer dispatcher que vemos, inutil si ya se vió Cinemas.
+Prueba es para que veamos como en configuration files, en el xml podemos configurar cual va a ser la página en la que se empieza.
+X es inutil
+Cookies muestra como crear cookies, asignarles un tiempo de vida e imprimirlas
+DB muestra como hacer requests desde un servlet
+URL muestra como pasar un parámetro extra mediante un link.
+Zodiaco fue la primera vez que pasamos un parámetro oculto, inutil si ya se leyó request-reply
+Recordar importar la librería de JSON
+WebAppJson nos enseña como empaquetar y desempaquetar objetos y arreglos con JSON.
+ShowDetails muestra como usar múltiples Ajax, pasarles parámetros y el onload en el body.
+Chirruper es el proyecto.
+WebApplicationWs es la primera vez que usamos un web service y hace una suma, es importante darle a cada webservice su propio package y palomear lo de implement web services as a stateless session bean; al crear un webservice, se agrega un .java en source packages con su nombre automaticamente. Recordar que se tiene que hacer clean and build y deploy para que funque
+WebApplicationClient es la primera vez que usamos un web service client y este hace referencia a WebApplicationWS. Es importante recordar que puedo llamar directamente al proyecto o usar la dirección como esta en los comentarios de la clase; pero que al usar cualquiera de los 2, si luego modificamos el web service del que estamos recuperando las cosas, no lo topa.
+WebCalculator enseña como podemos crear clases en java y mandarlas a llamar como return type.
+WebCalculatorClient es la interfaz de WebCalculator. Esta vez en lugar de jalar el client del WSDL, lo hicimos con project, además, el proyecto es tipo.java para demostrar que no importa el tipo de proyecto, se puede jalar sin problema.
+RESTfulWebServices, creamos un web service form pattern y se escoge simple para crearlo. Igual cambiamos el package a webservices, path a MyPath, classname a MyPathResource y MIME a text/html. Igual hace falta que le de deploy. Para correrlo, en restful web services le doy clic a myPathResource, le doy clic derecho y escogo test resource URI.
+JavaApllicationRestfulClient, le agrego un restful java client y en browse escojo el restfulWebServices. No funciona muy bien porque nos la jodimos al modificar restful webServices para trabajar con webrestfulclient
+WebRestfulClient es llamar a RESTfulWebServices mediante ajax, pero le falta el punto 3, aunque solo sirve para pasar parámetros con liga, entonces no es muy útil. Este no se llama con browse ni nada, si no que simplemente se le da la dirección; este dirección la sacas de hacerle test al restfulWebServices (el url del navegador). El botón de ok era para cuando quería llamarlo sin pasarle nada.
+Soap falta de hacer, es la de CurrencyWebServiceGlassFish
+Es importante recordar que para que funcionen bien los beans, hay que hacerles clean and build y deploy cada vez que los pruebe.
+Al crear un enterprise beans se crean 3 proyectos, es en enterpriseBeans-ejb donde voy a generar la lógica de lo que quiero hacer; después, en Enterprisebeans-war es donde genero el servlet para llamar al bean.
+Dentro de enterprise beans, puedo crear un messageBeans, para probarlo, debo de correr el ApplicationClientQueueSender, y vere en el glassfish server que lo que imprime normalmente esta modificado por este.

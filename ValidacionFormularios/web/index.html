@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <script>
+            function corrector(id){
+                var text=document.getElementById(id);
+                text.value=text.value.toUpperCase();
+                var i = text.value.length;
+                //Si no uso el text.value, me regresa el constructor chafa, como
+                // no hay toString, se debe de usar eso
+
+                var caracter = parseInt(text.value.charAt(i-1));
+                //charAt empieza en 0, y lentgh en 1, por eso el i-1
+                if(!isNaN(caracter)){
+                    text.value = text.value.substr(0, i-1)
+                    //document.getElementById("sout").innerHTML = caracter;
+                    //Esto sirve como un sout para probar
+                }
+            }
+        </script>
+        
+        <script>
+            function validateForm(){
+                var x=document.forms["myForm"]["firstName"].value; //Ya estoy pidiendo el value de x, entonces hacer x.value lo rompe
+                if (x==null || x=="") {
+                    alert("First name must be filled out");
+                    return false;
+                }
+                var x=document.forms["myForm"]["lastName"].value;
+                if (x==null || x=="") {
+                    alert("Last name must be filled out");
+                    return false;
+                }
+                var x=document.forms["myForm"]["mail"].value;
+                if (x==null || x=="") {
+                    alert("E-Mail must be filled out");
+                    return false;
+                }
+                if (x.indexOf("@") == -1) {
+                    alert("E-Mail must be valid");
+                    return false;
+                }
+                if (x.indexOf(".") == -1) {
+                    alert("E-Mail must be valid");
+                    return false;
+                }
+                var x=document.forms["myForm"]["gender"];
+                if (!x[0].checked) {
+                    if (!x[1].checked) {
+                        alert("Gender must be filled out");
+                        return false;
+                    }
+                }
+                var x=document.forms["myForm"]["country"].value;
+                if (x==null || x=="") {
+                    alert("Country must be filled out");
+                    return false;
+                }
+                var x=document.forms["myForm"]["comments"].value;
+                if (x==null || x=="") {
+                    alert("Additional comments must be filled out");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        
+        <form name="myForm" action="nextpage.jsp" onsubmit="return validateForm()" method="post">
+            <!--
+            <p id="sout"></p> Parte del sout
+            -->
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First name:</td>
+                        <td><input type="text" name="firstName" id="firstName" onkeyup="corrector('firstName');"></td>
+                    </tr>
+                    <tr>
+                        <td>Last name:</td>
+                        <td><input type="text" name="lastName" id="lastName" onkeyup="corrector('lastName');"></td>
+                    </tr>
+                    <tr>
+                        <td>E-mail:</td>
+                        <td><input type="text" name="mail" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>Male<input type="radio" name="gender" value="male" />Female<input type="radio" name="gender" value="female" /></td>
+                    </tr>
+                    <tr>
+                        <td>Country region</td>
+                        <td><select name="country">
+                                <option>Mexico</option>
+                                <option>Brazil</option>
+                                <option>Argentina</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>All the vaccines</td>
+                        <td><input type="checkbox" name="vaccines" value="ON" /></td>
+                    </tr>
+                    <tr>
+                        <td>Additonal comments</td>
+                        <td><input type="text" name="comments" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="reset" value="Reset" /></td>
+                        <td><input type="submit" value="Send" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>

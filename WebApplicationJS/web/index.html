@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--
+El sayHI no habría cargado de no haber puesto el script src, ese script src se 
+puede poner en cualquier parte sin ningún problema
+También se le puede poner un async, y differ despues del "javascriptfile1.js"
+Se suelen poner al principio del body por como funcionan, pero no es obligatorio,
+menos aunsi se usa async o defer (en defer literal no importa)
+Las variables de javascript son dinámicas, todas se llaman var.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input type="button" value="Funcion" onclick="sayHI();"/>
+        <script src="javascriptfile1.js"></script>
+        <script>document.write("<p>Escribiendo en el DOM</p>")</script>
+    </body>
+</html>

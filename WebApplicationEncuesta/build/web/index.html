@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        
+        <form action="ServletOpinion" method="POST">
+            
+            Nombre: <input type="text" name="nombre" value="Jose" /> <BR>
+            Nombre: <input type="text" name="apellidos" value="Gtz" /> <BR>
+            Opinion que le merecen los servlets
+            <input type="radio" name="opinion" value="mala" /> Mala
+            <input type="radio" name="opinion" value="regular" /> Regular
+            <input type="radio" name="opinion" value="buena" checked ="checked" /> Buena <BR>
+            Comentarios: <BR>
+            <textarea name="comentarios" rows="4" cols="20">
+ninguno
+            </textarea>
+            <input type="submit" value="OK" />
+            
+        </form>
+        
+    </body>
+</html>

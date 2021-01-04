@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+Ajax me permite cargas cosas en específico, para evitar cargar toda la página
+cada vez que algo se actualiza
+Cada que yo hago clic en el botón, lo actualiza, no es de un solo uso
+Post da mejor seguridad y nunca jala del caché, get es rápido y simple
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <script>
+            function loadNewContent(id, target) {
+                var ajaxRequest;
+                if (window.XMLHttpRequest){
+                    ajaxRequest=new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function(){
+                    //alert("Estado de solicitud: " + ajaxRequest.readyState);
+//Aparecen dos 1s porque en el primero se define la función y en el segundo se ejecuta
+                    //if (ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                        //document.getElementById(id).innerHTML=ajaxRequest.responseText;
+                    //}
+                    //Esto fue para el page1.jsp e info.txt
+                    if (ajaxRequest.readyState==4 && ajaxRequest.status==200){
+                        var xmlDoc=ajaxRequest.responseXML;
+                        var txt="";
+                        var x=xmlDoc.getElementsByTagName("ARTIST");
+                        for (var i=0;i<x.length;i++) {
+                            txt=txt + x[i].childNodes[0].nodeValue + "<br>";
+                        }
+                        document.getElementById("myDiv").innerHTML=txt;
+                    }
+                }
+                ajaxRequest.open("GET", target, true /*async*/);
+                ajaxRequest.send();
+                //ajaxRequest.open("POST", target, true /*async*/); //El target de aquí es la página a la que quiero ir
+                //ajaxRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+                //ajaxRequest.send("name=Octavio&age=49"); //Es aquí donde se pasan los parámetros
+                //El post lo use con el page1.jsp
+            }
+        </script>
+        <div>Linea 1</div>
+        <div>Linea 2</div>
+        <div id = "myDiv">Linea 3</div>
+        <div>Linea 4</div>
+        <input type="submit" value="Ajax" onclick="loadNewContent('myDiv', 'cdCatalog.xml')"/>
+<!--
+<input type="submit" value="Ajax" onclick="loadNewContent('myDiv', 'info.txt')"/>
+<input type="submit" value="Ajax" onclick="loadNewContent('myDiv', 'page1.jsp')"/>
+-->
+    </body>
+</html>
