@@ -1,1 +1,0 @@
-jmstopicamq.ExampleMessageListener
